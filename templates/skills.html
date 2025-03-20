@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Skills</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>My Skills</h1>
+    <ul>
+        {% for skill in skills_list %}
+            <li>{{ skill.name }}({{ skill.level }})</li>
+        {% endfor %}
+    </ul>
+    <h2>Add a New Skill!</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {{ 'green' if category == 'success' else 'red'}}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/skills">
+        <label for="skill">Skill:</label>
+        <input type="text" id="skill" name="skill" required>
+        <label for="level">Level:</label>
+        <input type="text" id="level" name="level" required>
+        <button type="submit">Add Skill</button>
+    </form>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/skills">Skills</a> |
+        <a href="/goals">Goals</a>
+    </nav>
+</body>
+</html>

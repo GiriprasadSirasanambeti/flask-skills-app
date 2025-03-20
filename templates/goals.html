@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Goals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>My Goals</h1>
+    <ul>
+        {% for goal in goals %}
+            <li>{{ goal }}</li>
+        {% endfor %}
+    </ul>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/skills">Skills</a> |
+        <a href="/goals">Goals</a>
+    </nav>
+</body>
+</html>
