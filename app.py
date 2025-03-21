@@ -12,6 +12,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(BASE_DIR, 'ski
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+
+
 #Define a Skill model
 class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,6 +50,30 @@ skills_dict = {
 
 # Tuple: Fixed goals
 goals = ("Reach 9 LPA", "Build a Web App", "Master Python")"""
+
+# Initialize the database with skills if the table is empty
+with app.app_context():
+    # Create the tables if they don't exist
+    db.create_all()
+
+    # Check if the skill table is empty
+    if Skill.query.count() == 0:
+        initial_skills = [
+            Skill(name="Python", level="Intermediate"),
+            Skill(name="Flask", level="Beginner"),
+            Skill(name="HTML", level="Beginner"),
+            Skill(name="SQL", level="Beginner"),
+            Skill(name="CSS", level="Beginner"),
+            Skill(name="Django", level="To Learn"),
+            Skill(name="Git", level="Beginner"),
+            Skill(name="Vue.js", level="Intermediate"),
+            Skill(name="JavaScript", level="Beginner"),
+            Skill(name="React", level="Intermediate"),
+            Skill(name="Node.js", level="Beginner")
+        ]
+        db.session.add_all(initial_skills)
+        db.session.commit()
+        print("Initialized database with 11 skills")
 
 @app.route("/")
 def home():
