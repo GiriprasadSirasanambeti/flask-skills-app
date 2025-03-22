@@ -92,7 +92,7 @@ def skills():
         try:
             db.session.add(skill_entry)
             db.session.commit()
-            flash(f"Added {new_skill} ({new_level}) successfully", "success")#success message
+            flash(f"Added... {new_skill} ({new_level}) successfully", "success")#success message
         except Exception as e:
             db.session.rollback()
             flash(f"Error adding skill: {str(e)}", "error")
